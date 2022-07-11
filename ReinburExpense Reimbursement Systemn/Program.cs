@@ -15,9 +15,20 @@ Console.WriteLine("The ticket is currently {0}.", Test.status);
 UserRepository TestRepo = new UserRepository();
 
 //Test Get Create New User
-try
+/*try
 {
     TestRepo.CreateUser(Mike);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}*/
+
+//Test Get User By ID
+try
+{
+    User ReturnUser = TestRepo.GetUser(0);
+    Console.WriteLine(ReturnUser);
 }
 catch (Exception e)
 {
@@ -37,5 +48,4 @@ catch (Exception e)
 {
     Console.WriteLine(e.Message);
 }
-
 //End user repo test

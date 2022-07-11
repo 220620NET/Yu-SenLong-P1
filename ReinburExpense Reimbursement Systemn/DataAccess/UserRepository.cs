@@ -47,7 +47,7 @@ public class UserRepository
         }
         catch(Exception e)
         {
-            throw e;
+            throw;
         }
         return UserList;
     }
@@ -96,5 +96,89 @@ public class UserRepository
             Console.WriteLine(e.Message);
             return false;
         }
+    }
+
+    public User GetUser(string Name2Get) //Username is unique is returning one user is fine
+    {
+        SqlConnection connection = ConnectionFactory.GetConnection(); //get a hold of the server
+        string sql = "select * from ERS_P1.users where username = '@Name2Get';";
+        SqlCommand command = new SqlCommand (sql, connection);
+        command.Parameters.AddWithValue("@Name2Get",Name2Get);
+        User ReturnUser = new User(1, "Mike", "1234", Role.Employee);; //forward declaration, assignment comes in later in the while loop
+
+        try
+        {
+            //opening the connection to the database
+            connection.Open();
+            //storing the result set of the DQL statement into a variable
+            SqlDataReader reader = command.ExecuteReader();
+
+            while(reader.Read()) //I have no idea if/how this works
+            {
+                UserID = (int) reader[0];
+                UserName = (String)reader[1];
+                PassWord = (String)reader[2];
+                StringRole = (String)reader[2];
+                if(StringRole == "Manager")
+                {
+                    UserRole = Role.Manager;
+                }
+                else
+                {
+                    UserRole = Role.Employee; //this will catch everything else hopefully
+                }
+                ReturnUser = new User(UserID,UserName,PassWord,UserRole);
+            }
+            reader.Close();
+            connection.Close();
+        }
+        catch(Exception e)
+        {
+            throw;
+        }
+        return ReturnUser;
+        
+    }
+
+    public User GetUser(int ID2Get) //ID is unique is returning one user is fine
+    {
+        SqlConnection connection = ConnectionFactory.GetConnection(); //get a hold of the server
+        string sql = "select * from ERS_P1.users where username = '@ID2Get';";
+        SqlCommand command = new SqlCommand (sql, connection);
+        string StringID = ID2Get.ToString();
+        command.Parameters.AddWithValue("@ID2Get",StringID);
+        User ReturnUser = new User(1, "Mike", "1234", Role.Employee);; //forward declaration, assignment comes in later in the while loop
+
+        try
+        {
+            //opening the connection to the database
+            connection.Open();
+            //storing the result set of the DQL statement into a variable
+            SqlDataReader reader = command.ExecuteReader();
+
+            while(reader.Read()) //I have no idea if/how this works
+            {
+                UserID = (int) reader[0];
+                UserName = (String)reader[1];
+                PassWord = (String)reader[2];
+                StringRole = (String)reader[2];
+                if(StringRole == "Manager")
+                {
+                    UserRole = Role.Manager;
+                }
+                else
+                {
+                    UserRole = Role.Employee; //this will catch everything else hopefully
+                }
+                ReturnUser = new User(UserID,UserName,PassWord,UserRole);
+            }
+            reader.Close();
+            connection.Close();
+        }
+        catch(Exception e)
+        {
+            throw;
+        }
+        return ReturnUser;
     }
 }
