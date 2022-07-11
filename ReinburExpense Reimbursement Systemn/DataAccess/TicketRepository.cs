@@ -1,4 +1,4 @@
-namespace DataAccess;
+namespace TickeData;
 
 public class TicketRepository
 {
