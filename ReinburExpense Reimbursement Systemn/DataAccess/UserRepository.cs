@@ -15,7 +15,7 @@ public class UserRepository
     public List<User> GetAllUsers()
     {
         List<User> UserList = new List<User>(); //list to be returned 
-        SqlConnection connection = ConnectionFactory.GetConnection(); //get a hold of the server
+        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users;"; //the command to extract all records from a table
         SqlCommand command = new SqlCommand (sql, connection); //turn it into a command object
 
@@ -54,7 +54,7 @@ public class UserRepository
 
     public bool CreateUser(User NewUser)
     {
-        SqlConnection connection = ConnectionFactory.GetConnection(); //get a hold of the server
+        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
         string sql = "insert into ERS_P1.users (username,password,role) values (@username,@password,@role);";
         SqlCommand command = new SqlCommand (sql, connection);
 
@@ -100,7 +100,7 @@ public class UserRepository
 
     public User GetUser(string Name2Get) //Username is unique is returning one user is fine
     {
-        SqlConnection connection = ConnectionFactory.GetConnection(); //get a hold of the server
+        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users where username = '@Name2Get';";
         SqlCommand command = new SqlCommand (sql, connection);
         command.Parameters.AddWithValue("@Name2Get",Name2Get);
@@ -142,7 +142,7 @@ public class UserRepository
 
     public User GetUser(int ID2Get) //ID is unique is returning one user is fine
     {
-        SqlConnection connection = ConnectionFactory.GetConnection(); //get a hold of the server
+        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users where username = '@ID2Get';";
         SqlCommand command = new SqlCommand (sql, connection);
         string StringID = ID2Get.ToString();

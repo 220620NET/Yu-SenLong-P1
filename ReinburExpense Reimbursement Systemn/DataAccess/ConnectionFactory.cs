@@ -5,16 +5,25 @@ using sensitive;
 public class ConnectionFactory
 {
     //Hidding the password in another file for now, can change later
-    private static string connectionString = "Server=tcp:syuserver.database.windows.net,1433;Initial Catalog=SenLong's DataBase;Persist Security Info=False;User ID=sqluser;Password="+ sensitiveVariables.dbpassword+";MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+    private readonly string _connectionString = "Server=tcp:syuserver.database.windows.net,1433;Initial Catalog=SenLong's DataBase;Persist Security Info=False;User ID=sqluser;Password="+ sensitiveVariables.dbpassword+";MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-    public static void GetInstance()
+    private static ConnectionFactory? _instance;
+
+    private ConnectionFactory()
     {
-        //idk what goes in here, So Imma leave it empty for now
+    }
+    public static ConnectionFactory GetInstance() //make sure that there exist only one Connections Factory Object
+    {
+        if(_instance == null)
+        {
+            _instance = new ConnectionFactory();
+        }
+            return _instance;
     }
 
-    public static SqlConnection GetConnection() //returns just the connection to the server
+    public SqlConnection GetConnection() //returns just the connection to the server
     {
-        SqlConnection connection = new SqlConnection(connectionString); //I think you can do this is a cute one liner, but I forgot how to
+        SqlConnection connection = new SqlConnection(_connectionString); //I think you can do this is a cute one liner, but I forgot how to
         return connection;
     }
 }
