@@ -22,7 +22,7 @@ public class Ticket
         }
     }
 
-    public Ticket(string reason, long ID, long authorID, long resolverID) //this is just a place holder constructor to do some basic testing, to be deleted once everything is implemented
+    public Ticket(string reason, int ID, int authorID, int resolverID, decimal amount) //this is just a place holder constructor to do some basic testing, to be deleted once everything is implemented
     {
         if(!string.IsNullOrEmpty(reason))
         {
@@ -30,6 +30,7 @@ public class Ticket
             this.ID=ID;
             this.authorID=authorID;
             this.resolverID=resolverID;
+            this.amount=amount;
         }
         else
         {
@@ -38,9 +39,14 @@ public class Ticket
     }
     public Status status = Status.Pending; //this can go into the constructor, but here is also fine
     public string reason; //is gets assigned when the constructor is called
-    public long ID{get;set;} //place holder until further details are known
-    public long authorID{get;set;}
-    public long resolverID{get;set;}
-    private decimal amount;
+    public int ID{get;set;} //place holder until further details are known
+    public int authorID{get;set;}
+    public int resolverID{get;set;}
+    public decimal amount{get;set;}
+
+    public override string ToString() // just print stuff out for convenience 
+    {
+        return "ID: " + this.ID + ", AuthorID: " + this.authorID + ", ResolverID: " + this.resolverID + ", Reason: " + this.reason + ", Status: " + this.status;
+    }
 
 }
