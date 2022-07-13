@@ -105,7 +105,7 @@ public class UserRepository
         string sql = "select * from ERS_P1.users where username = '@Name2Get';";
         SqlCommand command = new SqlCommand (sql, connection);
         command.Parameters.AddWithValue("@Name2Get",Name2Get);
-        User ReturnUser = new User(1, "Mike", "1234", Role.Employee);; //forward declaration, assignment comes in later in the while loop
+        User ReturnUser = new User(); //forward declaration, assignment comes in later in the while loop
         bool successful = false; //indicating if the read is successful
 
         try
@@ -150,11 +150,10 @@ public class UserRepository
     public User GetUser(int ID2Get) //ID is unique so returning one user is fine
     {
         SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
-        string sql = "select * from ERS_P1.users where username = '@ID2Get';";
+        string sql = "select * from ERS_P1.users where ID = @ID2Get;";
         SqlCommand command = new SqlCommand (sql, connection);
-        string StringID = ID2Get.ToString();
-        command.Parameters.AddWithValue("@ID2Get",StringID);
-        User ReturnUser = new User(1, "Mike", "1234", Role.Employee);; //forward declaration, assignment comes in later in the while loop
+        command.Parameters.AddWithValue("@ID2Get",ID2Get);
+        User ReturnUser = new User(); //forward declaration, assignment comes in later in the while loop
         bool successful = false; //indicating if the read is successful
 
         try

@@ -52,8 +52,9 @@ catch (Exception e)
 //End user repo test
 
 //Start user repo test
-//test create Reimbursement
-/*TicketRepository TestRepo2 = new TicketRepository();
+TicketRepository TestRepo2 = new TicketRepository();
+
+/*test create Reimbursement
 try
 {
     TestRepo2.CreateReimbursement(Test);
@@ -62,4 +63,28 @@ catch (Exception e)
 {
     Console.WriteLine(e.Message);
 }*/
+
+/*test update Reimbursement
+try
+{
+    Test.amount = (decimal)61.2;
+    TestRepo2.UpdateReimbursement(Test);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
+*/
+
+//test get ticket by ID
+try
+{
+    Ticket ReturnedTicket = TestRepo2.GetReimbursementByID(1);
+    Console.WriteLine(ReturnedTicket);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
+
 //End user repo test

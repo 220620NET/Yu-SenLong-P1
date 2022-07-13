@@ -1,7 +1,6 @@
 namespace userModels;
 using System.ComponentModel.DataAnnotations;
 
-
 public enum Role //since there are only two possible roles, enum helps in tracking them
 {
     Manager,
@@ -9,6 +8,14 @@ public enum Role //since there are only two possible roles, enum helps in tracki
 }
 public class User
 {
+    public User() //Default Constructor, if you see this in the data base something has gone wrong
+    {
+        this.ID = 0;
+        this.userName = "DefaultUser_SomeThingHasGoneWrong";
+        this.passWord = "1234";
+        this.userRole = Role.Employee;
+    }
+
     public User(int ID, String userName, String passWord, Role role) //these are just placeholder attributes that does nothing more than the default getter and setters
     {
         this.ID = ID;
