@@ -1,5 +1,6 @@
 namespace ticketModels;
 using customExceptions;
+using System.ComponentModel.DataAnnotations;
 
 public enum Status //since there are only three possible status, enum helps in tracking them
 {
