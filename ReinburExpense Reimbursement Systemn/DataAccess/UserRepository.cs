@@ -53,7 +53,7 @@ public class UserRepository
         return UserList;
     }
 
-    public bool CreateUser(User NewUser)
+    public int CreateUser(User NewUser) //this returns the id of the new user of creation is successful
     {
         SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
         string sql = "insert into ERS_P1.users (username,password,role) values (@username,@password,@role);";
@@ -86,16 +86,20 @@ public class UserRepository
 
             connection.Close();
 
-            if(rowsAffected==0)
+            if(rowsAffected==0) //Fail
             {
-                return false;
+                return 0; //this is going to get check by the business layer
             }
-                return true;
+            else //Success, take another trip to the data base to grab the ID of the new User
+            {
+                User returnUser = this.GetUser(this.UserName);
+                return returnUser.ID;
+            }
         }
         catch(Exception e)
         {
             Console.WriteLine(e.Message);
-            return false;
+            return 0;
         }
     }
 

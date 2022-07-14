@@ -1,6 +1,5 @@
 namespace ticketModels;
 using customExceptions;
-using System.ComponentModel.DataAnnotations;
 
 public enum Status //since there are only three possible status, enum helps in tracking them
 {
@@ -71,7 +70,7 @@ public class Ticket
 
     public override string ToString() // just print stuff out for convenience 
     {
-        return "ID: " + this.ID + ", AuthorID: " + this.authorID + ", ResolverID: " + this.resolverID + ", Reason: " + this.reason + ", Status: " + this.status;
+        return "ID: " + this.ID + ", AuthorID: " + this.authorID + ", ResolverID: " + this.resolverID + ", Reason: " + this.reason + ", Status: " + this.status +", Amount:" +this.amount;
     }
 
 }

@@ -1,5 +1,4 @@
 namespace userModels;
-using System.ComponentModel.DataAnnotations;
 
 public enum Role //since there are only two possible roles, enum helps in tracking them
 {
