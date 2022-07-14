@@ -24,11 +24,12 @@ public static class AuthServices
         throw new InvalidCredentialsException("Please double check your login information and try again"); //password is wrong
     }
 
-    public static int Register(User User2Regi) //Takes a user and return the same user if the registration is successful
-    {
+    public static int Register(User User2Regi) //Takes a user and return the ID if the registration is successful
+    { //maybe I need to do null checking somewhere, leaving it for now
         try
         {
             User returnUser = UserRepo.GetUser(User2Regi.userName); //grab the record with the same username
+            throw new UsernameNotAvailableException("UserName Already In Use");
         }
         catch (RecordNotFoundException) //such record cannot be found, start the registration process 
         {

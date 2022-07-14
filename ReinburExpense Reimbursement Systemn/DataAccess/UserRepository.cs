@@ -12,7 +12,10 @@ public class UserRepository
     private Role UserRole;
     private string StringRole;
 
-
+    /// <summary>
+    /// Returns a list of all users in the DB
+    /// </summary>
+    /// <returns>a list of all users in the DB</returns>
     public List<User> GetAllUsers()
     {
         List<User> UserList = new List<User>(); //list to be returned 
@@ -52,8 +55,12 @@ public class UserRepository
         }
         return UserList;
     }
-
-    public int CreateUser(User NewUser) //this returns the id of the new user of creation is successful
+    /// <summary>
+    /// this returns the id of the new user of creation is successful
+    /// </summary>
+    /// <param name="NewUser"></param>
+    /// <returns>the id of the new user</returns>
+    public int CreateUser(User NewUser)
     {
         SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
         string sql = "insert into ERS_P1.users (username,password,role) values (@username,@password,@role);";
@@ -102,8 +109,13 @@ public class UserRepository
             return 0;
         }
     }
-
-    public User GetUser(string Name2Get) //Username is unique so returning one user is fine
+    /// <summary>
+    /// Looking for a particular user in the db
+    /// </summary>
+    /// <param name="Name2Get"></param>
+    /// <returns></returns>
+    /// <exception cref="RecordNotFoundException">Occurs if no user exist matching the given username</exception>
+    public User GetUser(string Name2Get)
     {
         SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users where username = '@Name2Get';";
@@ -150,7 +162,12 @@ public class UserRepository
         throw new RecordNotFoundException();
         
     }
-
+    /// <summary>
+    /// Looking for a particular user in the db
+    /// </summary>
+    /// <param name="ID2Get"></param>
+    /// <returns></returns>
+    /// <exception cref="RecordNotFoundException">Occurs if no user exist matching the given ID</exception>
     public User GetUser(int ID2Get) //ID is unique so returning one user is fine
     {
         SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
