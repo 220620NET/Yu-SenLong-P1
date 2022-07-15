@@ -1,5 +1,6 @@
 namespace TicketServices;
 using TickeData;
+using ticketModels;
 
 public class TicketServices
 {//for detailed documentation on each method, see TicketRepo class
@@ -9,13 +10,13 @@ public class TicketServices
         _TicketRepo = TicketRepo;
     }
 
-    public public bool UpdateReimbursement(Ticket Ticket2Update)
+    public bool UpdateReimbursement(Ticket Ticket2Update)
     {
         try
         {
             return _TicketRepo.UpdateReimbursement(Ticket2Update);
         }
-        catch(exception)
+        catch(Exception )
         {
             throw;
         }
@@ -27,7 +28,7 @@ public class TicketServices
         {
             return _TicketRepo.CreateReimbursement(NewTicket);
         }
-        catch(exception)
+        catch(Exception )
         {
             throw;
         }
@@ -39,7 +40,7 @@ public class TicketServices
         {
             return _TicketRepo.GetReimbursementByAuthor(AuthorID);
         }
-        catch(exception)
+        catch(Exception )
         {
             throw;
         }
@@ -51,7 +52,7 @@ public class TicketServices
         {
             return _TicketRepo.GetReimbursementByStatus(status);
         }
-        catch(exception)
+        catch(Exception )
         {
             throw;
         }
@@ -63,7 +64,7 @@ public class TicketServices
         {
             return _TicketRepo.GetReimbursementByID(ID2Get);
         }
-        catch(exception)
+        catch(Exception )
         {
             throw;
         }

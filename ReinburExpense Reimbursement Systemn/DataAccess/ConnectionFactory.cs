@@ -2,21 +2,22 @@ namespace ConnectionFactory;
 using System.Data.SqlClient;
 using sensitive;
 
-public class ConnectionFactory
+public class ConnectionFactoryClass
 {
     //Hidding the password in another file for now, can change later
-    private readonly string _connectionString = "Server=tcp:syuserver.database.windows.net,1433;Initial Catalog=SenLong's DataBase;Persist Security Info=False;User ID=sqluser;Password="+ sensitiveVariables.dbpassword+";MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+    private readonly string _connectionString;
 
-    private static ConnectionFactory? _instance;
+    private static ConnectionFactoryClass? _instance;
 
-    private ConnectionFactory()
+    private ConnectionFactoryClass(string connectionString)
     {
+        _connectionString = connectionString;
     }
-    public static ConnectionFactory GetInstance() //make sure that there exist only one Connections Factory Object
+    public static ConnectionFactoryClass GetInstance(string ConnectionString) //make sure that there exist only one Connections Factory Object
     {
         if(_instance == null)
         {
-            _instance = new ConnectionFactory();
+            _instance = new ConnectionFactoryClass(ConnectionString);
         }
             return _instance;
     }

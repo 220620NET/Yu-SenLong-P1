@@ -1,5 +1,7 @@
 namespace UserServices;
 using UserData;
+using userModels;
+using customExceptions;
 
 public class UserServices
 {//for detailed documentation on each method, see UserRepo class
@@ -15,7 +17,7 @@ public class UserServices
         {
             return _UserRepo.GetAllUsers();
         }
-        catch(exception)
+        catch(Exception )
         {
             throw;
         }
@@ -29,7 +31,7 @@ public class UserServices
             {
                 return _UserRepo.CreateUser(NewUser);
             }
-            catch(exception)
+            catch(Exception )
             {
                 throw;
             }
@@ -45,7 +47,7 @@ public class UserServices
             {
                 return _UserRepo.GetUser(Name2Get);
             }
-            catch(exception)
+            catch(Exception )
             {
                 throw;
             }
@@ -61,7 +63,7 @@ public class UserServices
             {
                 return _UserRepo.GetUser(ID2Get);
             }
-            catch(exception)
+            catch(Exception )
             {
                 throw;
             }

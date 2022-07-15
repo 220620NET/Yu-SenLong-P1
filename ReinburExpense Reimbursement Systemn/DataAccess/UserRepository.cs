@@ -11,6 +11,11 @@ public class UserRepository
     private string PassWord;
     private Role UserRole;
     private string StringRole;
+    private readonly ConnectionFactoryClass _ConnectionFactory;
+    public UserRepository(ConnectionFactoryClass ConnectionFactory)
+    {
+        _ConnectionFactory = ConnectionFactory;
+    }
 
     /// <summary>
     /// Returns a list of all users in the DB
@@ -19,7 +24,7 @@ public class UserRepository
     public List<User> GetAllUsers()
     {
         List<User> UserList = new List<User>(); //list to be returned 
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users;"; //the command to extract all records from a table
         SqlCommand command = new SqlCommand (sql, connection); //turn it into a command object
 
@@ -62,7 +67,7 @@ public class UserRepository
     /// <returns>the id of the new user</returns>
     public int CreateUser(User NewUser)
     {
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "insert into ERS_P1.users (username,password,role) values (@username,@password,@role);";
         SqlCommand command = new SqlCommand (sql, connection);
 
@@ -117,7 +122,7 @@ public class UserRepository
     /// <exception cref="RecordNotFoundException">Occurs if no user exist matching the given username</exception>
     public User GetUser(string Name2Get)
     {
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users where username = '@Name2Get';";
         SqlCommand command = new SqlCommand (sql, connection);
         command.Parameters.AddWithValue("@Name2Get",Name2Get);
@@ -170,7 +175,7 @@ public class UserRepository
     /// <exception cref="RecordNotFoundException">Occurs if no user exist matching the given ID</exception>
     public User GetUser(int ID2Get) //ID is unique so returning one user is fine
     {
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users where ID = @ID2Get;";
         SqlCommand command = new SqlCommand (sql, connection);
         command.Parameters.AddWithValue("@ID2Get",ID2Get);

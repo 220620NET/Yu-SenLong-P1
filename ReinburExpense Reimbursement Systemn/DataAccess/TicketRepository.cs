@@ -13,6 +13,11 @@ public class TicketRepository
     private Status TicketStatus;
     private string StringStatus;
     private Decimal TicketAmount;
+    private readonly ConnectionFactoryClass _ConnectionFactory;
+    public TicketRepository(ConnectionFactoryClass ConnectionFactory)
+    {
+        _ConnectionFactory = ConnectionFactory;
+    }
     /// <summary>
     /// Retrieves the tickets with the given ID from the data base
     /// </summary>
@@ -22,7 +27,7 @@ public class TicketRepository
     public Ticket GetReimbursementByID(int ID2Get)
     {
         Ticket ReturnTicket = new Ticket();
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.tickets where ID = @ID2Get;";
         SqlCommand command = new SqlCommand (sql, connection);
         command.Parameters.AddWithValue("@ID2Get",ID2Get);
@@ -81,7 +86,7 @@ public class TicketRepository
     {
         Ticket ReturnTicket;
         List<Ticket> TicketList = new List<Ticket>();
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.tickets where status = @StringStatus;";
         if(status == Status.Approved)
         {
@@ -152,7 +157,7 @@ public class TicketRepository
     {
         Ticket ReturnTicket;
         List<Ticket> TicketList = new List<Ticket>();
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.tickets where authorID = @AuthorID;";
         SqlCommand command = new SqlCommand (sql, connection);
         command.Parameters.AddWithValue("@AuthorID",AuthorID);
@@ -208,7 +213,7 @@ public class TicketRepository
     /// <returns>true for a succssful creation, flase if not</returns>
     public bool CreateReimbursement(Ticket NewTicket) 
     {
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "insert into ERS_P1.tickets (reason,status,authorID,resolverID,amount) values (@TicketReason,@StringStatus,@TicketAuthor,@TicketResolver,@TicketAmount);";
         SqlCommand command = new SqlCommand (sql, connection);
 
@@ -266,7 +271,7 @@ public class TicketRepository
     /// <exception cref="RecordNotFoundException">Occurs if no tickets exist matching the given ID</exception>
     public bool UpdateReimbursement(Ticket Ticket2Update) 
     {
-        SqlConnection connection = ConnectionFactory.GetInstance().GetConnection(); //get a hold of the server
+        SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "update ERS_P1.tickets set reason = @TicketReason, status = @StringStatus, authorID=@TicketAuthor, resolverID=@TicketResolver, amount=@TicketAmount where ID=@TicketID;";
         SqlCommand command = new SqlCommand (sql, connection);
 
