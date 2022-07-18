@@ -1,4 +1,4 @@
-namespace UserServices;
+namespace UserService;
 using UserData;
 using userModels;
 using customExceptions;

@@ -27,7 +27,8 @@ create table ERS_P1.tickets
 INSERT into ERS_P1.users (username, password, role) values ('sampleManager', 'ManagerPass', 'Manager');
 INSERT into ERS_P1.users (username, password, role) values ('sampleEmployee', 'EmployeePass', 'Employee');
 
-select * from ERS_P1.tickets; 
+select * from ERS_P1.users; 
+delete from ERS_P1.users where username = dude;
 select username from ERS_P1.users;
 select * from ERS_P1.users where username = 'sampleManager' and password = 'ManagerPass'; -- this is usefull for checking matching passwords and usernames
 

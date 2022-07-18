@@ -1,4 +1,4 @@
-namespace TicketServices;
+namespace TicketService;
 using TickeData;
 using ticketModels;
 

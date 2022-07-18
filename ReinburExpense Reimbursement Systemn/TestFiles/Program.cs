@@ -3,6 +3,7 @@ using customExceptions;
 using ticketModels;
 using UserData;
 using TickeData;
+using ConnectionFactory;
 //moq
 
 //Start Model test
@@ -14,7 +15,7 @@ Console.WriteLine("The ticket is currently {0}.", Test.status);
 //End Model test
 
 //Start user repo test
-UserRepository TestRepo = new UserRepository();
+UserRepository TestRepo = new UserRepository(ConnectionFactoryClass.GetInstance());
 
 //Test Get Create New User
 /*try
@@ -53,7 +54,7 @@ catch (Exception e)
 //End user repo test
 
 //Start user repo test
-TicketRepository TestRepo2 = new TicketRepository();
+TicketRepository TestRepo2 = new TicketRepository(ConnectionFactoryClass.GetInstance());
 
 /*test create Reimbursement
 try

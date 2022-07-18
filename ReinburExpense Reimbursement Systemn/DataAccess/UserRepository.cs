@@ -123,7 +123,7 @@ public class UserRepository
     public User GetUser(string Name2Get)
     {
         SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
-        string sql = "select * from ERS_P1.users where username = '@Name2Get';";
+        string sql = "select * from ERS_P1.users where username = @Name2Get;";
         SqlCommand command = new SqlCommand (sql, connection);
         command.Parameters.AddWithValue("@Name2Get",Name2Get);
         User ReturnUser = new User(); //forward declaration, assignment comes in later in the while loop
@@ -138,7 +138,7 @@ public class UserRepository
 
             while(reader.Read()) //I have no idea if/how this works
             {
-                successful = true; //toggle true, there is atleast one thing to read
+                successful = true; //toggle true
                 UserID = (int) reader[0];
                 UserName = (String)reader[1];
                 PassWord = (String)reader[2];
@@ -165,7 +165,6 @@ public class UserRepository
             return ReturnUser;
         }
         throw new RecordNotFoundException();
-        
     }
     /// <summary>
     /// Looking for a particular user in the db

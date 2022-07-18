@@ -1,4 +1,4 @@
-﻿namespace AuthServices;
+﻿namespace AuthService;
 using userModels;
 using UserData;
 using customExceptions;

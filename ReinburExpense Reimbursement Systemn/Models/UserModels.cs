@@ -15,6 +15,14 @@ public class User
         this.userRole = Role.Employee;
     }
 
+    public User(String userName, String passWord) //used for login
+    {
+        this.ID = 0;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.userRole = Role.Employee;
+    }
+
     public User(int ID, String userName, String passWord, Role role) //these are just placeholder attributes that does nothing more than the default getter and setters
     {
         this.ID = ID;
