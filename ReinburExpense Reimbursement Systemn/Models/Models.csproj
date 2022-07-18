@@ -8,4 +8,7 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>    
   </PropertyGroup>
 
+  <ItemGroup>
+  </ItemGroup>
+
 </Project>

@@ -61,8 +61,8 @@ public class Ticket
         }
     }
 
-    public Status status;
-    public string reason; //is gets assigned when the constructor is called
+    public Status status{get;set;}
+    public string reason{get;set;} //is gets assigned when the constructor is called
     public int ID{get;set;} //place holder until further details are known
     public int authorID{get;set;}
     public int resolverID{get;set;}

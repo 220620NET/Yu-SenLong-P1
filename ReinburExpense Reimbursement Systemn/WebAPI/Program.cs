@@ -4,6 +4,7 @@ using UserService;
 using AuthService;
 using TicketService;
 using userModels;
+using ticketModels;
 using ConnectionFactory;
 using Controllers;
 using TickeData;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<TicketRepository>();
 builder.Services.AddScoped<AuthController>();
 builder.Services.AddScoped<AuthServices>();
 builder.Services.AddScoped<UserController>();
+builder.Services.AddScoped<TicketController>();
 
 var app = builder.Build();
 app.UseSwagger();
@@ -38,7 +40,7 @@ app.MapGet
 
 app.MapGet
     (
-        "/users", () => 
+        "/user/getallusers", () => 
         {
             var scope = app.Services.CreateScope();
             UserController controller = scope.ServiceProvider.GetRequiredService<UserController>();
@@ -64,7 +66,7 @@ app.MapGet
 
 app.MapGet
     (
-        "/username", (string name) => 
+        "/user/username", (string name) => 
         {
             var scope = app.Services.CreateScope();
             UserController controller = scope.ServiceProvider.GetRequiredService<UserController>();
@@ -74,11 +76,61 @@ app.MapGet
 
 app.MapGet
     (
-        "/userid", (int id) => 
+        "/user/userid", (int id) => 
         {
             var scope = app.Services.CreateScope();
             UserController controller = scope.ServiceProvider.GetRequiredService<UserController>();
             return controller.GetUser(id);
+        }
+    );
+
+app.MapPost
+    (
+        "/ticket/new", (Ticket NewTicket) => 
+        {
+            var scope = app.Services.CreateScope();
+            TicketController controller = scope.ServiceProvider.GetRequiredService<TicketController>();
+            return controller.CreateReimbursement(NewTicket);
+        }
+    );
+
+app.MapPut
+    (
+        "/ticket/update", (Ticket Ticket2Update) => 
+        {
+            var scope = app.Services.CreateScope();
+            TicketController controller = scope.ServiceProvider.GetRequiredService<TicketController>();
+            return controller.UpdateReimbursement(Ticket2Update);
+        }
+    );
+
+app.MapGet
+    (
+        "/ticket/status", (Status Status2Get) => 
+        {
+            var scope = app.Services.CreateScope();
+            TicketController controller = scope.ServiceProvider.GetRequiredService<TicketController>();
+            return controller.GetReimbursementByStatus(Status2Get);
+        }
+    );
+
+app.MapGet
+    (
+        "/ticket/author", (int Author) => 
+        {
+            var scope = app.Services.CreateScope();
+            TicketController controller = scope.ServiceProvider.GetRequiredService<TicketController>();
+            return controller.GetReimbursementByAuthor(Author);
+        }
+    );
+
+app.MapGet
+    (
+        "/ticket/ticketid", (int ID) => 
+        {
+            var scope = app.Services.CreateScope();
+            TicketController controller = scope.ServiceProvider.GetRequiredService<TicketController>();
+            return controller.GetReimbursementByID(ID);
         }
     );
 

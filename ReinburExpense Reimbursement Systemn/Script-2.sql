@@ -27,7 +27,7 @@ create table ERS_P1.tickets
 INSERT into ERS_P1.users (username, password, role) values ('sampleManager', 'ManagerPass', 'Manager');
 INSERT into ERS_P1.users (username, password, role) values ('sampleEmployee', 'EmployeePass', 'Employee');
 
-select * from ERS_P1.users; 
+select * from ERS_P1.tickets; 
 delete from ERS_P1.users where username = 'dude';
 select username from ERS_P1.users;
 select * from ERS_P1.users where username = 'Mike';

@@ -38,7 +38,7 @@ public class AuthController
         {
             User User2Login = new User(username,password);
             User ReturnUser = _AServices.login(User2Login);
-            return Results.Accepted("/login", ReturnUser);
+            return Results.Ok(ReturnUser);
         }
         catch(InvalidCredentialsException)
         {
