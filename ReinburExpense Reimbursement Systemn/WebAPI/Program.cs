@@ -21,6 +21,7 @@ builder.Services.AddScoped<TicketServices>();
 builder.Services.AddScoped<TicketRepository>();
 builder.Services.AddScoped<AuthController>();
 builder.Services.AddScoped<AuthServices>();
+builder.Services.AddScoped<UserController>();
 
 var app = builder.Build();
 app.UseSwagger();
@@ -40,8 +41,8 @@ app.MapGet
         "/users", () => 
         {
             var scope = app.Services.CreateScope();
-            UserServices service = scope.ServiceProvider.GetRequiredService<UserServices>();
-            return service.GetAllUsers();
+            UserController controller = scope.ServiceProvider.GetRequiredService<UserController>();
+            return controller.GetAllUsers();
         }
     );
 
@@ -66,18 +67,18 @@ app.MapGet
         "/username", (string name) => 
         {
             var scope = app.Services.CreateScope();
-            UserServices service = scope.ServiceProvider.GetRequiredService<UserServices>();
-            return service.GetUser(name);
+            UserController controller = scope.ServiceProvider.GetRequiredService<UserController>();
+            return controller.GetUser(name);
         }
     );
 
 app.MapGet
     (
-        "/userID", (int ID) => 
+        "/userid", (int id) => 
         {
             var scope = app.Services.CreateScope();
-            UserServices service = scope.ServiceProvider.GetRequiredService<UserServices>();
-            return service.GetUser(ID);
+            UserController controller = scope.ServiceProvider.GetRequiredService<UserController>();
+            return controller.GetUser(id);
         }
     );
 
