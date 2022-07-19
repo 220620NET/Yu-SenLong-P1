@@ -1,4 +1,6 @@
 namespace userModels;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 public enum Role //since there are only two possible roles, enum helps in tracking them
 {
@@ -40,6 +42,7 @@ public class User
     }
 
     //I am not sure any of the things below should be public, I will change them once I have more details regarding the project
+    [JsonIgnore]
     public int ID {get;set;} //This should check for ID validity
     public string userName{get;set;} //This should search for the userName
     public string passWord{get;set;} //This should check if password matches the userName
