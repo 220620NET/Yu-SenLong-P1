@@ -20,7 +20,7 @@ create table ERS_P1.tickets
 	status VARCHAR(10) NOT NULL CHECK (status IN('Pending', 'Approved', 'Denied')),
 	authorID int foreign key references ERS_P1.users(id) not null,
 	resolverID int foreign key references ERS_P1.users(id) not null,
-	amount DECIMAL not null,
+	amount MONEY not null,
 	primary key(id)
 );
 
@@ -28,7 +28,7 @@ INSERT into ERS_P1.users (username, password, role) values ('sampleManager', 'Ma
 INSERT into ERS_P1.users (username, password, role) values ('sampleEmployee', 'EmployeePass', 'Employee');
 
 select * from ERS_P1.tickets; 
-delete from ERS_P1.users where username = 'dude';
+delete from ERS_P1.tickets where reason = 'string description';
 select username from ERS_P1.users;
 select * from ERS_P1.users where username = 'Mike';
 select * from ERS_P1.users where username = 'sampleManager' and password = 'ManagerPass'; -- this is usefull for checking matching passwords and usernames

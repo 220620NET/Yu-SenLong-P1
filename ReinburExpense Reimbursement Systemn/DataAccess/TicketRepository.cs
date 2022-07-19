@@ -315,7 +315,7 @@ public class TicketRepository
             {
                 return false; //services should check this and throw an exception
             }
-                return true;
+                throw new RecordNotFoundException();
         }
         catch(Exception)
         {

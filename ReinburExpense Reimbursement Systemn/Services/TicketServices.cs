@@ -1,6 +1,7 @@
 namespace TicketService;
 using TickeData;
 using ticketModels;
+using customExceptions; 
 
 public class TicketServices
 {//for detailed documentation on each method, see TicketRepo class
@@ -12,6 +13,7 @@ public class TicketServices
 
     public bool UpdateReimbursement(Ticket Ticket2Update)
     {
+        
         try
         {
             return _TicketRepo.UpdateReimbursement(Ticket2Update);
@@ -24,6 +26,10 @@ public class TicketServices
 
     public bool CreateReimbursement(Ticket NewTicket)
     {
+        if(NewTicket.authorID<=0 || NewTicket.resolverID<=0) //Lets only check these two for now
+        {
+            throw new RecordNotFoundException();
+        }
         try
         {
             return _TicketRepo.CreateReimbursement(NewTicket);
