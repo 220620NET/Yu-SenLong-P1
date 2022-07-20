@@ -16,6 +16,10 @@ public class UserRepository
     {
         _ConnectionFactory = ConnectionFactory;
     }
+    public UserRepository() //empty constructor for moq testing, should've done an interface
+    {
+
+    }
 
     /// <summary>
     /// Returns a list of all users in the DB
@@ -120,7 +124,7 @@ public class UserRepository
     /// <param name="Name2Get"></param>
     /// <returns></returns>
     /// <exception cref="RecordNotFoundException">Occurs if no user exist matching the given username</exception>
-    public User GetUser(string Name2Get)
+    public virtual User GetUser(string Name2Get)
     {
         SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users where username = @Name2Get;";
@@ -172,7 +176,7 @@ public class UserRepository
     /// <param name="ID2Get"></param>
     /// <returns></returns>
     /// <exception cref="RecordNotFoundException">Occurs if no user exist matching the given ID</exception>
-    public User GetUser(int ID2Get) //ID is unique so returning one user is fine
+    public virtual User GetUser(int ID2Get) //ID is unique so returning one user is fine
     {
         SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
         string sql = "select * from ERS_P1.users where ID = @ID2Get;";

@@ -20,7 +20,7 @@ public class AuthController
         try
         {
             int returnID = _AServices.Register(User2Register); //I think this has to happen in another line for the try catch to work
-            return Results.Created("/register", returnID);
+            return Results.Created($"/user/userid?id={returnID}", returnID);
         }
         catch(UsernameNotAvailableException)
         {
