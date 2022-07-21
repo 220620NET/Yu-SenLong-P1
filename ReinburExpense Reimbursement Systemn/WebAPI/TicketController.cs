@@ -20,8 +20,8 @@ public class TicketController
         }
         try
         {
-            bool success = _TServices.CreateReimbursement(NewTicket); //I think this has to happen in another line for the try catch to work
-            return Results.Created("/ticket/new", success);
+            int returnID = _TServices.CreateReimbursement(NewTicket); //I think this has to happen in another line for the try catch to work
+            return Results.Created($"/ticket/ticketid?id={returnID}", returnID);
         }
         catch(Exception)
         {

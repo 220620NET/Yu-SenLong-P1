@@ -24,7 +24,7 @@ public class TicketServices
         }
     }
 
-    public bool CreateReimbursement(Ticket NewTicket)
+    public int CreateReimbursement(Ticket NewTicket)
     {
         if(NewTicket.authorID<=0 || NewTicket.resolverID<=0) //Lets only check these two for now
         {

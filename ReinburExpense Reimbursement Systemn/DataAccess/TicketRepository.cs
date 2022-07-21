@@ -47,6 +47,7 @@ public class TicketRepository
                 StringStatus = (string)reader[2];
                 TicketAuthor = (int)reader[3];
                 TicketAmount = (Decimal)reader[5];
+                successful = true;
 
                 if(StringStatus == "Approved")
                 {
@@ -237,10 +238,10 @@ public class TicketRepository
     /// </summary>
     /// <param name="NewTicket"></param>
     /// <returns>true for a succssful creation, flase if not</returns>
-    public bool CreateReimbursement(Ticket NewTicket) 
+    public int CreateReimbursement(Ticket NewTicket) 
     {
         SqlConnection connection = _ConnectionFactory.GetConnection(); //get a hold of the server
-        string sql = "insert into ERS_P1.tickets (reason,status,authorID,resolverID,amount) values (@TicketReason,@StringStatus,@TicketAuthor,@TicketResolver,@TicketAmount);";
+        string sql = "insert into ERS_P1.tickets (reason,status,authorID,resolverID,amount) OUTPUT Inserted.ID values (@TicketReason,@StringStatus,@TicketAuthor,@TicketResolver,@TicketAmount);";
         SqlCommand command = new SqlCommand (sql, connection);
 
         TicketID = NewTicket.ID; //convert everything down to a single variable, there are better way to do this
@@ -281,15 +282,11 @@ public class TicketRepository
             connection.Open();
 
             //for DML statements
-            int rowsAffected = command.ExecuteNonQuery();
+            int returnID = (int)command.ExecuteScalar();
 
             connection.Close();
 
-            if(rowsAffected==0)
-            {
-                return false;
-            }
-                return true;
+            return returnID;
         }
         catch(Exception e)
         {
