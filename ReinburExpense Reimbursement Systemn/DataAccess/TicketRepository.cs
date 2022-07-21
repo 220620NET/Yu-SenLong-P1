@@ -9,7 +9,7 @@ public class TicketRepository
     private int TicketID;
     private string TicketReason;
     private int TicketAuthor;
-    private int TicketResolver;
+    private int? TicketResolver;
     private Status TicketStatus;
     private string StringStatus;
     private Decimal TicketAmount;
@@ -42,13 +42,12 @@ public class TicketRepository
 
             while(reader.Read()) //I have no idea if/how this works
             {
-                successful = true; //toggle true
                 TicketID = (int) reader[0];
                 TicketReason = (String)reader[1];
                 StringStatus = (string)reader[2];
                 TicketAuthor = (int)reader[3];
-                TicketResolver = (int)reader[4];
                 TicketAmount = (Decimal)reader[5];
+
                 if(StringStatus == "Approved")
                 {
                     TicketStatus = Status.Pending;
@@ -60,6 +59,15 @@ public class TicketRepository
                 else
                 {
                     TicketStatus = Status.Pending;
+                }
+
+                if(reader[4] == DBNull.Value)
+                {
+                    TicketResolver = null;
+                }
+                else
+                {
+                    TicketResolver = (int)reader[4];
                 }
                 ReturnTicket = new Ticket(TicketReason,TicketID,TicketAuthor,TicketResolver,TicketAmount, TicketStatus);
             }
@@ -116,8 +124,8 @@ public class TicketRepository
                 TicketReason = (String)reader[1];
                 StringStatus = (string)reader[2];
                 TicketAuthor = (int)reader[3];
-                TicketResolver = (int)reader[4];
                 TicketAmount = (Decimal)reader[5];
+
                 if(StringStatus == "Approved")
                 {
                     TicketStatus = Status.Pending;
@@ -129,6 +137,15 @@ public class TicketRepository
                 else
                 {
                     TicketStatus = Status.Pending;
+                }
+
+                if(reader[4] == DBNull.Value)
+                {
+                    TicketResolver = null;
+                }
+                else
+                {
+                    TicketResolver = (int)reader[4];
                 }
                 ReturnTicket = new Ticket(TicketReason,TicketID,TicketAuthor,TicketResolver,TicketAmount, TicketStatus);
                 TicketList.Add(ReturnTicket);
@@ -175,19 +192,28 @@ public class TicketRepository
                 TicketReason = (String)reader[1];
                 StringStatus = (string)reader[2];
                 TicketAuthor = (int)reader[3];
-                TicketResolver = (int)reader[4];
                 TicketAmount = (Decimal)reader[5];
+
                 if(StringStatus == "Approved")
                 {
-                    TicketStatus = Status.Approved;
+                    TicketStatus = Status.Pending;
                 }
                 else if(StringStatus == "Denied")
                 {
-                    TicketStatus = Status.Denied;
+                    TicketStatus = Status.Pending;
                 }
                 else
                 {
                     TicketStatus = Status.Pending;
+                }
+
+                if(reader[4] == DBNull.Value)
+                {
+                    TicketResolver = null;
+                }
+                else
+                {
+                    TicketResolver = (int)reader[4];
                 }
                 ReturnTicket = new Ticket(TicketReason,TicketID,TicketAuthor,TicketResolver,TicketAmount, TicketStatus);
                 TicketList.Add(ReturnTicket);
@@ -220,7 +246,15 @@ public class TicketRepository
         TicketID = NewTicket.ID; //convert everything down to a single variable, there are better way to do this
         TicketReason = NewTicket.reason;
         TicketAuthor = NewTicket.authorID;
-        TicketResolver = NewTicket.resolverID;
+        if(TicketResolver==null)
+        {
+            command.Parameters.AddWithValue("@TicketResolver",DBNull.Value);
+        }
+        else
+        {
+            TicketResolver = NewTicket.resolverID;
+            command.Parameters.AddWithValue("@TicketResolver",TicketResolver);
+        }
         TicketStatus = NewTicket.status;
         TicketAmount = NewTicket.amount;
         if(TicketStatus == Status.Approved)
@@ -239,7 +273,6 @@ public class TicketRepository
         command.Parameters.AddWithValue("@TicketReason",TicketReason); //adding all the value to the parameters
         command.Parameters.AddWithValue("@StringStatus",StringStatus); //this is a mess
         command.Parameters.AddWithValue("@TicketAuthor",TicketAuthor); //there has to be a better way to do this
-        command.Parameters.AddWithValue("@TicketResolver",TicketResolver);
         command.Parameters.AddWithValue("@TicketAmount",TicketAmount);
 
         try
@@ -313,9 +346,9 @@ public class TicketRepository
 
             if(rowsAffected==0) //this should work if there are no tickets matching the ID given
             {
-                return false; //services should check this and throw an exception
-            }
                 throw new RecordNotFoundException();
+            }
+                return true;
         }
         catch(Exception)
         {
