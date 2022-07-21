@@ -29,15 +29,6 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapGet("/", () => "Hello World!");
-
-app.MapGet("/greet/{name}", (string name) => {return $"Hi {name}!";}); //Verb(route)
-
-app.MapGet
-    (
-        "/greet", (string name) => {return $"Hello {name}!";} //greet?name=xyz
-    );
-
 app.MapGet
     (
         "/user/getallusers", () => 
