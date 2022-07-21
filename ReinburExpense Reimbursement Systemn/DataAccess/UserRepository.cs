@@ -44,7 +44,7 @@ public class UserRepository
                 UserID = (int) reader[0];
                 UserName = (String)reader[1];
                 PassWord = (String)reader[2];
-                StringRole = (String)reader[2];
+                StringRole = (String)reader[3];
                 if(StringRole == "Manager")
                 {
                     UserRole = Role.Manager;
@@ -146,7 +146,7 @@ public class UserRepository
                 UserID = (int) reader[0];
                 UserName = (String)reader[1];
                 PassWord = (String)reader[2];
-                StringRole = (String)reader[2];
+                StringRole = (String)reader[3];
                 if(StringRole == "Manager")
                 {
                     UserRole = Role.Manager;
@@ -198,7 +198,7 @@ public class UserRepository
                 UserID = (int) reader[0];
                 UserName = (String)reader[1];
                 PassWord = (String)reader[2];
-                StringRole = (String)reader[2];
+                StringRole = (String)reader[3];
                 if(StringRole == "Manager")
                 {
                     UserRole = Role.Manager;

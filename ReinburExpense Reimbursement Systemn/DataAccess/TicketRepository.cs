@@ -179,11 +179,11 @@ public class TicketRepository
                 TicketAmount = (Decimal)reader[5];
                 if(StringStatus == "Approved")
                 {
-                    TicketStatus = Status.Pending;
+                    TicketStatus = Status.Approved;
                 }
                 else if(StringStatus == "Denied")
                 {
-                    TicketStatus = Status.Pending;
+                    TicketStatus = Status.Denied;
                 }
                 else
                 {

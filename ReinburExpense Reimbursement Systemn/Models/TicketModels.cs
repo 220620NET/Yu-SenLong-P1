@@ -1,7 +1,7 @@
 namespace ticketModels;
 using customExceptions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+/*using System.Text.Json;
+using System.Text.Json.Serialization;*/
 
 public enum Status //since there are only three possible status, enum helps in tracking them
 {
@@ -65,7 +65,7 @@ public class Ticket
 
     public Status status{get;set;}
     public string reason{get;set;} //is gets assigned when the constructor is called
-    [JsonIgnore]
+    //[JsonIgnore]
     public int ID{get;set;} //place holder until further details are known
     public int authorID{get;set;}
     public int resolverID{get;set;}
