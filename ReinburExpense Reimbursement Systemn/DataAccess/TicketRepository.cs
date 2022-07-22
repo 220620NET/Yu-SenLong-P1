@@ -51,11 +51,11 @@ public class TicketRepository
 
                 if(StringStatus == "Approved")
                 {
-                    TicketStatus = Status.Pending;
+                    TicketStatus = Status.Approved;
                 }
                 else if(StringStatus == "Denied")
                 {
-                    TicketStatus = Status.Pending;
+                    TicketStatus = Status.Denied;
                 }
                 else
                 {
@@ -197,11 +197,11 @@ public class TicketRepository
 
                 if(StringStatus == "Approved")
                 {
-                    TicketStatus = Status.Pending;
+                    TicketStatus = Status.Approved;
                 }
                 else if(StringStatus == "Denied")
                 {
-                    TicketStatus = Status.Pending;
+                    TicketStatus = Status.Denied;
                 }
                 else
                 {
@@ -282,7 +282,7 @@ public class TicketRepository
             connection.Open();
 
             //for DML statements
-            int returnID = (int)command.ExecuteScalar();
+            int returnID = (int)command.ExecuteScalar(); //according to the document, this would be null if the result set is empty
 
             connection.Close();
 

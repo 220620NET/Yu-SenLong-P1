@@ -30,7 +30,7 @@ INSERT into ERS_P1.tickets (reason, status, authorID, amount) values ('I clone a
 
 select * from ERS_P1.users; 
 select * from ERS_P1.tickets; 
-delete from ERS_P1.tickets where reason = 'string description';
+delete from ERS_P1.users where username = 'Dude';
 select username from ERS_P1.users;
 select * from ERS_P1.users where username = 'Mike';
 select * from ERS_P1.users where username = 'sampleManager' and password = 'ManagerPass'; -- this is usefull for checking matching passwords and usernames
@@ -41,3 +41,4 @@ join ERS_P1.tickets on (authorID = ERS_P1.users.id and resolverID=ERS_P1.users.i
 
 update ERS_P1.tickets set amount = 2.25 where ID=1;
 update ERS_P1.tickets set reason = '@TicketReason', status = 'Pending', authorID=3, resolverID=1, amount=20 where ID=3;
+select * from ERS_P1.tickets where ID = 5;
